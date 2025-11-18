@@ -11,7 +11,7 @@ Requisitos mínimos:
 Instalação e deploy do cluster:
 
 1. Clone este repositório:
-   git clone https://github.com/your-org/ansible-k8s-kubeadm.git
+   git clone https://github.com/jonataaraujo/ansible-k8s-kubeadm.git
    cd ansible-k8s-kubeadm
 
 2. Certifique-se de ter o ansible:
