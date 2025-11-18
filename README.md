@@ -12,19 +12,27 @@ Requisitos mínimos:
 Instalação e deploy do cluster:
 
 1. Clone este repositório:
+```
    git clone https://github.com/jonataaraujo/ansible-k8s-kubeadm.git && cd ansible-k8s-kubeadm
-
+```
 2. Certifique-se de ter o ansible:
+```
    ansible --version
-
+```
 3. Configure os IPs, usuário e senha dos hosts no arquivo de inventory:
+   ```
    vi inventory.ini
+   ```
 
 4. Executar o deploy:
+```
    ansible-playbook site.yml
+```
 
 5. A versão do repositório do kubernetes e `v1.31` e a versão do kubernetes é a `v1.31.14`, para mudar a versão, pode ser passado como parametro extra na execução do deploy:
-   ansible-playbook site.yml -e kube_repo_version=v1.32 -e kube_version=v1.32.10
+```
+ansible-playbook site.yml -e kube_repo_version=v1.32 -e kube_version=v1.32.10
+```
 
 Estrutura do projeto
 - ansible/ — playbooks, roles e a coleção Ansible.
