@@ -6,6 +6,7 @@ Resumo rápido
 - Configuração e orquestração via Ansible.
 
 Requisitos mínimos:
+- VMs criadas com distruibuição REDHAT (Rocky Linux 9);
 - Recursos recomendados para cluster padrão (1 control plane + 2 workers): ≥ 6 CPUs, ≥ 10 GB RAM, ≥ 50 GB disco.
 
 Instalação e deploy do cluster:
