@@ -1,0 +1,14 @@
+---
+# handlers file for disable-swap
+- name: feedback_handler
+  debug:
+    msg: >
+      Swap disable was {{
+        'successful' if (swapoff_result is not defined or swapoff_result.rc == 0) else 'unsuccessful'
+      }},
+      and fstab update was {{
+        'successful' if replace_status.changed else 'not needed'
+      }},
+      and daemon reload was {{
+        'successful' if reload_status.stderr == '' else 'unsuccessful'
+      }}.

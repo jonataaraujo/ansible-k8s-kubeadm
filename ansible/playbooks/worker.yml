@@ -1,0 +1,6 @@
+---
+- name: "Install and configure Kubernetes Worker Node"
+  hosts: worker
+  become: yes
+  roles:
+    - ./ansible/roles/configure_worker_kubeadm

@@ -1,0 +1,7 @@
+---
+# handlers file for install-runc-for-containerd
+- name: Restart containerd
+  service:
+    name: containerd
+    enabled: yes
+    state: restarted

@@ -1,0 +1,9 @@
+---
+# handlers file for configure-and-start-kubelet
+- name: Reload systemd
+  command: systemctl daemon-reload
+
+- name: Restart kubelet
+  service:
+    name: kubelet
+    state: restarted

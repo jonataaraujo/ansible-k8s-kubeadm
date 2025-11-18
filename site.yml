@@ -1,0 +1,9 @@
+---
+- import_playbook: ansible/playbooks/prepare.yml
+  when: provision_so | default(true)
+
+- import_playbook: ansible/playbooks/master.yml
+  when: provision_master | default(true)
+
+- import_playbook: ansible/playbooks/worker.yml
+  when: provision_worker | default(true)

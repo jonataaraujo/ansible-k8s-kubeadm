@@ -1,0 +1,18 @@
+---
+# tasks file for install-k8s-components
+- name: Ensure all packages are up to date ... please wait!
+  dnf:
+    name: '*'
+    state:  latest
+    # update_cache: yes
+    disable_excludes: kubernetes
+
+- name: Install k8s components
+  dnf:
+    name:
+      - kubelet
+      - kubeadm
+      - kubectl
+      - kubernetes-cni
+    state:  present
+    disable_excludes: kubernetes

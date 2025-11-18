@@ -1,0 +1,18 @@
+---
+- name: Download CNI Flannel
+  ansible.builtin.get_url:
+    url: https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+    dest: /tmp/kube-flannel.yml
+    mode: '755'
+    
+- name: Configure Flannel 
+  ansible.builtin.replace:
+    path: /tmp/kube-flannel.yml
+    regexp: '10\.244\.0\.0/16'
+    replace: "{{ pod_network_cidr }}"
+
+- name: Install Flannel
+  ansible.builtin.shell: |
+    kubectl apply -f /tmp/kube-flannel.yml
+  args:
+    executable: /bin/bash

@@ -1,0 +1,36 @@
+---
+- name: Ensure the drop-in config dir exists
+  file:
+    path: "{{ config_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Create kubelet config drop-in file
+  copy:
+    dest: "{{ config_dir }}/kubelet-config.yaml"
+    content: |
+      apiVersion: kubelet.config.k8s.io/v1beta3
+      kind: KubeletConfiguration
+      cgroupDriver: systemd
+  register: kubelet_config
+
+- name: Create systemd drop-in directory for kubelet
+  file:
+    path: /etc/systemd/system/kubelet.service.d
+    state: directory
+
+- name: Configure kubelet to use config directory
+  copy:
+    dest: /etc/systemd/system/kubelet.service.d/10-kubelet-extra-args.conf
+    content: |
+      [Service]
+      Environment=KUBELET_EXTRA_ARGS=--config-dir={{ config_dir }}
+  notify:
+    - Reload systemd
+    - Restart kubelet
+
+- name: Ensure kubelet service is enabled and started
+  service:
+    name: kubelet
+    enabled: yes
+    state: started

@@ -1,0 +1,3 @@
+---
+# vars file for install-runc-for-containerd
+dest_dir: /usr/local/sbin

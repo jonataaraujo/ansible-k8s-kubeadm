@@ -1,0 +1,24 @@
+---
+# tasks file for disable-swap
+- name: Check if swap is enabled
+  command: swapon --summary
+  register: swap_status
+  changed_when: swap_status.stdout != ''
+
+- name: Disable swap immediately
+  command: swapoff -a
+  when: swap_status.stdout != ''
+  register: swapoff_result
+
+- name: Ensure swap is commented out in /etc/fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^(?!#)(.*swap.*)$'
+    replace: '# \1'
+  register: replace_status
+
+- name: daemon_reload
+  command: systemctl daemon-reload
+  register: reload_status
+  notify: feedback_handler
+  when: replace_status.changed

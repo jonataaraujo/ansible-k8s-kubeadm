@@ -1,0 +1,7 @@
+---
+- name: Check packages for required tools
+  yum:
+    name:
+      - tar
+      - unzip
+    state: present

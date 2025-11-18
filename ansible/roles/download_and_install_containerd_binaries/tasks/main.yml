@@ -1,0 +1,42 @@
+---
+# tasks file for download-and-install-containerd-binaries
+- name: Download and extract the containerd tarball
+  unarchive:
+    src: https://github.com/containerd/containerd/releases/download/v1.6.8/containerd-1.6.8-linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: yes
+
+- name: Create containerd service
+  blockinfile:
+    path: /etc/systemd/system/containerd.service
+    block: |
+      [Unit]
+      Description=containerd container runtime
+      Documentation=https://containerd.io
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/local/bin/containerd
+      Restart=always
+      RestartSec=5
+      KillMode=process
+      Delegate=yes
+      LimitNOFILE=1048576
+      LimitNPROC=infinity
+      LimitCORE=infinity
+
+      [Install]
+      WantedBy=multi-user.target
+    create: yes
+    state: present
+  register: service_status
+
+- block:
+  - name: Reload systemd daemon
+    command: systemctl daemon-reload
+  - name: Enable and start the containerd service
+    service:
+      name: containerd
+      enabled: yes
+      state: restarted
+  when: service_status.changed

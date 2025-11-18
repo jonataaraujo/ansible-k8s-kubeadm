@@ -1,0 +1,7 @@
+---
+# handlers file for install-cni-plugins-for-containerd
+- name: Restart containerd
+  service:
+    name: containerd
+    enabled: yes
+    state: restarted

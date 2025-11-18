@@ -1,0 +1,7 @@
+---
+- name: "Install and configure Kubernetes Master Node"
+  hosts: master
+  become: yes
+  roles:
+    - ./ansible/roles/configure_master_kubeadm
+    - ./ansible/roles/configure_network_kubeadm

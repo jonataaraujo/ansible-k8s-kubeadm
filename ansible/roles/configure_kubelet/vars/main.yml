@@ -1,0 +1,2 @@
+---
+config_dir: /etc/kubernetes/kubelet-config.d

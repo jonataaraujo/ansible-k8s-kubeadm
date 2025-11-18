@@ -1,0 +1,15 @@
+---
+# tasks file for install-runc-for-containerd
+- name: Ensure the /usr/local/sbin directory exists
+  file:
+    path: "{{ dest_dir }}"
+    state: directory
+    mode: '0755'
+  notify: Restart containerd
+
+- name: Download runc.amd64 binary
+  get_url:
+    url: https://github.com/opencontainers/runc/releases/download/v1.1.13/runc.amd64
+    dest: "{{ dest_dir }}/runc"
+    mode: '0755'
+  notify: Restart containerd

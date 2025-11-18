@@ -1,0 +1,3 @@
+---
+# vars file for install-cni-plugins-for-containerd
+dest_dir: /opt/cni/bin

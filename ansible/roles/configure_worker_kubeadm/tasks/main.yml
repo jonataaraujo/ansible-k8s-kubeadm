@@ -1,0 +1,9 @@
+---
+- name: Gather file facts
+  ansible.builtin.stat:
+    path: /etc/kubernetes/kubelet.conf
+  register: kubelet_conf
+
+- name: Execute join command
+  command: "{{ hostvars[groups['master'][0]].kube_join_command }} --cri-socket unix:///run/containerd/containerd.sock"
+  when: not kubelet_conf.stat.exists

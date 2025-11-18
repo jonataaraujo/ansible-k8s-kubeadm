@@ -1,0 +1,18 @@
+---
+- name: Download CNI Calico
+  ansible.builtin.get_url:
+    url: https://docs.projectcalico.org/manifests/calico.yaml
+    dest: /tmp/kube-calico.yml
+    mode: '755'
+    
+- name: Configure calico 
+  ansible.builtin.replace:
+    path: /tmp/kube-calico.yml
+    regexp: '10\.244\.0\.0/16'
+    replace: "{{ pod_network_cidr }}"
+
+- name: Install calico
+  ansible.builtin.shell: |
+    kubectl apply -f /tmp/kube-calico.yml
+  args:
+    executable: /bin/bash

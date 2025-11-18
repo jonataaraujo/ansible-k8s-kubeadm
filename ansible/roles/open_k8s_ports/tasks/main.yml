@@ -1,0 +1,57 @@
+---
+# tasks file for open-k8s-ports
+- name: Open k8s ports
+  firewalld:
+    port: 6443/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_6443
+- name: Open k8s ports
+  firewalld:
+    port: 2379-2380/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_2379
+- name: Open k8s ports
+  firewalld:
+    port: 10250/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_10250
+- name: Open k8s ports
+  firewalld:
+    port: 10256/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_10256
+- name: Open k8s ports
+  firewalld:
+    port: 10257/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_10257
+- name: Open k8s ports
+  firewalld:
+    port: 10259/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_10259
+- name: Open k8s ports
+  firewalld:
+    port: 30000-32767/tcp
+    permanent: yes 
+    state: enabled
+  register: port_status_30000
+
+- name: reload firewalld
+  service:
+    name: firewalld
+    state: reloaded 
+  when: > 
+    port_status_6443.changed or
+    port_status_2379.changed or
+    port_status_10250.changed or
+    port_status_10256.changed or
+    port_status_10257.changed or
+    port_status_10259.changed or
+    port_status_30000.changed

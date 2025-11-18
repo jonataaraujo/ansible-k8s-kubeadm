@@ -1,0 +1,18 @@
+---
+- name: "Prepare nodes for Kubernetes installation"
+  hosts: all
+  become: yes
+  roles:
+    - ./ansible/roles/common
+    - ./ansible/roles/requirenments
+    - ./ansible/roles/disable_selinux
+    - ./ansible/roles/download_and_install_containerd_binaries
+    - ./ansible/roles/configure_containerd
+    - ./ansible/roles/install_runc_for_containerd
+    - ./ansible/roles/install_cni_plugins_for_containerd
+    - ./ansible/roles/enable_ipv4_packet_forwarding
+    - ./ansible/roles/open_k8s_ports
+    - ./ansible/roles/install_k8s_repo
+    - ./ansible/roles/install_k8s_components
+    - ./ansible/roles/disable_swap
+    - ./ansible/roles/configure_kubelet
