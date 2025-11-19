@@ -29,7 +29,7 @@ Instalação e deploy do cluster:
    ansible-playbook site.yml
 ```
 
-5. A versão do repositório do kubernetes e `v1.31` e a versão do kubernetes é a `v1.31.14`, para mudar a versão, pode ser passado como parametro extra na execução do deploy:
+5. A versão do repositório do kubernetes e `v1.34` e a versão do kubernetes é a `v1.34.10`, para mudar a versão, pode ser passado como parametro extra na execução do deploy:
 ```
 ansible-playbook site.yml -e kube_repo_version=v1.32 -e kube_version=v1.32.10
 ```
@@ -44,6 +44,7 @@ Estrutura do projeto
 Configurações importantes
 - Verifique o inventário em `inventory.ini` para alterar IPs/hostnames.
 - A configuração do kubeconfig costuma estar disponível em `~/admin.conf` na VM control plane; copie para `~/.kube/config` se desejar usar kubectl localmente via SSH.
+- O CNI de network por default é o **calico**, pode ser alterado para **flannel**, no arquivo [ansible/roles/configure_network_kubeadm/vars/main.yml](https://github.com/jonataaraujo/ansible-k8s-kubeadm/blob/main/ansible/roles/configure_network_kubeadm/vars/main.yml).
 
 Dicas e solução de problemas
 - Para ativar debug do Ansible: adicione `-vvv` ao comando `ansible-playbook`.
