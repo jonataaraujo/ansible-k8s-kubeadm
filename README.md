@@ -29,7 +29,7 @@ Instalação e deploy do cluster:
    ansible-playbook site.yml
 ```
 
-5. A versão do repositório do kubernetes e `v1.34` e a versão do kubernetes é a `v1.34.10`, para mudar a versão, pode ser passado como parametro extra na execução do deploy:
+5. A versão do repositório do kubernetes e `v1.34` e a versão do kubeadm é a `v1.34.2`, para mudar a versão, pode ser passado como parâmetro extra na execução do deploy:
 ```
 ansible-playbook site.yml -e kube_repo_version=v1.32 -e kube_version=v1.32.10
 ```
