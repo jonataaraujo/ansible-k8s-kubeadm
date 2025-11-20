@@ -1,5 +1,5 @@
 ---
 k8s_dir: /etc/kubernetes
-kube_version: v1.34.10
+kube_version: v1.34.2
 service_network_cidr: "10.96.0.0/16"
 pod_network_cidr: "10.244.0.0/16"
